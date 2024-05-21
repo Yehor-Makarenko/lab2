@@ -1,6 +1,6 @@
 %skeleton "lalr1.cc"
 %defines
-%define parser_class_name {tiger_parser}
+%define api.parser.class {tiger_parser}
 
 %define api.token.constructor
 %define api.value.type variant
@@ -105,6 +105,12 @@ using utils::nl;
 // Declare precedence rules
 
 %nonassoc FUNCTION VAR TYPE DO OF ASSIGN;
+%left OR;
+%left AND;
+%left EQ NEQ;
+%left GE GT LE LT;
+%left PLUS MINUS;
+%left TIMES DIVIDE;
 %left UMINUS;
 
 // Declare grammar rules and production actions
