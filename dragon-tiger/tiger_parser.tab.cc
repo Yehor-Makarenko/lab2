@@ -221,6 +221,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -292,6 +293,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -363,6 +365,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -433,6 +436,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -628,7 +632,7 @@ namespace yy {
   yyla.location.begin.filename = yyla.location.end.filename = &driver.file;
 }
 
-#line 632 "tiger_parser.tab.cc"
+#line 636 "tiger_parser.tab.cc"
 
 
     /* Initialize the stack.  The initial state will be set in
@@ -758,6 +762,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -820,359 +825,387 @@ namespace yy {
           switch (yyn)
             {
   case 2: // program: expr
-#line 119 "src/parser/tiger_parser.yy"
+#line 121 "src/parser/tiger_parser.yy"
               { driver.result_ast = yystack_[0].value.as < Expr * > (); }
-#line 826 "tiger_parser.tab.cc"
+#line 831 "tiger_parser.tab.cc"
     break;
 
   case 3: // decl: varDecl
-#line 122 "src/parser/tiger_parser.yy"
+#line 124 "src/parser/tiger_parser.yy"
               { yylhs.value.as < Decl * > () = yystack_[0].value.as < Decl * > (); }
-#line 832 "tiger_parser.tab.cc"
+#line 837 "tiger_parser.tab.cc"
     break;
 
   case 4: // decl: funcDecl
-#line 123 "src/parser/tiger_parser.yy"
+#line 125 "src/parser/tiger_parser.yy"
               { yylhs.value.as < Decl * > () = yystack_[0].value.as < Decl * > (); }
-#line 838 "tiger_parser.tab.cc"
+#line 843 "tiger_parser.tab.cc"
     break;
 
   case 5: // expr: stringExpr
-#line 126 "src/parser/tiger_parser.yy"
+#line 128 "src/parser/tiger_parser.yy"
                  { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 844 "tiger_parser.tab.cc"
+#line 849 "tiger_parser.tab.cc"
     break;
 
   case 6: // expr: seqExpr
-#line 127 "src/parser/tiger_parser.yy"
+#line 129 "src/parser/tiger_parser.yy"
              { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 850 "tiger_parser.tab.cc"
+#line 855 "tiger_parser.tab.cc"
     break;
 
   case 7: // expr: var
-#line 128 "src/parser/tiger_parser.yy"
+#line 130 "src/parser/tiger_parser.yy"
          { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 856 "tiger_parser.tab.cc"
+#line 861 "tiger_parser.tab.cc"
     break;
 
   case 8: // expr: callExpr
-#line 129 "src/parser/tiger_parser.yy"
+#line 131 "src/parser/tiger_parser.yy"
               { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 862 "tiger_parser.tab.cc"
+#line 867 "tiger_parser.tab.cc"
     break;
 
   case 9: // expr: opExpr
-#line 130 "src/parser/tiger_parser.yy"
+#line 132 "src/parser/tiger_parser.yy"
             { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 868 "tiger_parser.tab.cc"
+#line 873 "tiger_parser.tab.cc"
     break;
 
   case 10: // expr: negExpr
-#line 131 "src/parser/tiger_parser.yy"
+#line 133 "src/parser/tiger_parser.yy"
              { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 874 "tiger_parser.tab.cc"
+#line 879 "tiger_parser.tab.cc"
     break;
 
   case 11: // expr: assignExpr
-#line 132 "src/parser/tiger_parser.yy"
+#line 134 "src/parser/tiger_parser.yy"
                 { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 880 "tiger_parser.tab.cc"
+#line 885 "tiger_parser.tab.cc"
     break;
 
   case 12: // expr: whileExpr
-#line 133 "src/parser/tiger_parser.yy"
+#line 135 "src/parser/tiger_parser.yy"
                { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 886 "tiger_parser.tab.cc"
+#line 891 "tiger_parser.tab.cc"
     break;
 
   case 13: // expr: forExpr
-#line 134 "src/parser/tiger_parser.yy"
+#line 136 "src/parser/tiger_parser.yy"
              { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 892 "tiger_parser.tab.cc"
+#line 897 "tiger_parser.tab.cc"
     break;
 
   case 14: // expr: breakExpr
-#line 135 "src/parser/tiger_parser.yy"
+#line 137 "src/parser/tiger_parser.yy"
                { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 898 "tiger_parser.tab.cc"
+#line 903 "tiger_parser.tab.cc"
     break;
 
   case 15: // expr: letExpr
-#line 136 "src/parser/tiger_parser.yy"
+#line 138 "src/parser/tiger_parser.yy"
              { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 904 "tiger_parser.tab.cc"
+#line 909 "tiger_parser.tab.cc"
     break;
 
   case 16: // expr: intExpr
-#line 137 "src/parser/tiger_parser.yy"
+#line 139 "src/parser/tiger_parser.yy"
              { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
-#line 910 "tiger_parser.tab.cc"
+#line 915 "tiger_parser.tab.cc"
     break;
 
-  case 17: // varDecl: "var" "id" typeannotation ":=" expr
-#line 141 "src/parser/tiger_parser.yy"
+  case 17: // expr: ifExpr
+#line 140 "src/parser/tiger_parser.yy"
+            { yylhs.value.as < Expr * > () = yystack_[0].value.as < Expr * > (); }
+#line 921 "tiger_parser.tab.cc"
+    break;
+
+  case 18: // varDecl: "var" "id" typeannotation ":=" expr
+#line 144 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Decl * > () = new VarDecl(yystack_[4].location, yystack_[3].value.as < Symbol > (), yystack_[2].value.as < boost::optional<Symbol> > (), yystack_[0].value.as < Expr * > ()); }
-#line 916 "tiger_parser.tab.cc"
+#line 927 "tiger_parser.tab.cc"
     break;
 
-  case 18: // funcDecl: "function" "id" "(" params ")" typeannotation "=" expr
-#line 145 "src/parser/tiger_parser.yy"
+  case 19: // funcDecl: "function" "id" "(" params ")" typeannotation "=" expr
+#line 148 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Decl * > () = new FunDecl(yystack_[7].location, yystack_[6].value.as < Symbol > (), yystack_[2].value.as < boost::optional<Symbol> > (), yystack_[4].value.as < std::vector<VarDecl *> > (), yystack_[0].value.as < Expr * > ()); }
-#line 922 "tiger_parser.tab.cc"
+#line 933 "tiger_parser.tab.cc"
     break;
 
-  case 19: // stringExpr: "string"
-#line 151 "src/parser/tiger_parser.yy"
+  case 20: // stringExpr: "string"
+#line 154 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new StringLiteral(yystack_[0].location, yystack_[0].value.as < Symbol > ()); }
-#line 928 "tiger_parser.tab.cc"
+#line 939 "tiger_parser.tab.cc"
     break;
 
-  case 20: // intExpr: "integer"
-#line 155 "src/parser/tiger_parser.yy"
-  { yylhs.value.as < Expr * > () = new IntegerLiteral(yystack_[0].location, yystack_[0].value.as < int > ()); }
-#line 934 "tiger_parser.tab.cc"
-    break;
-
-  case 21: // var: "id"
+  case 21: // intExpr: "integer"
 #line 158 "src/parser/tiger_parser.yy"
+  { yylhs.value.as < Expr * > () = new IntegerLiteral(yystack_[0].location, yystack_[0].value.as < int > ()); }
+#line 945 "tiger_parser.tab.cc"
+    break;
+
+  case 22: // var: "id"
+#line 161 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new Identifier(yystack_[0].location, yystack_[0].value.as < Symbol > ()); }
-#line 940 "tiger_parser.tab.cc"
+#line 951 "tiger_parser.tab.cc"
     break;
 
-  case 22: // callExpr: "id" "(" arguments ")"
-#line 162 "src/parser/tiger_parser.yy"
+  case 23: // callExpr: "id" "(" arguments ")"
+#line 165 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new FunCall(yystack_[3].location, yystack_[1].value.as < std::vector<Expr *> > (), yystack_[3].value.as < Symbol > ()); }
-#line 946 "tiger_parser.tab.cc"
+#line 957 "tiger_parser.tab.cc"
     break;
 
-  case 23: // negExpr: "-" expr
-#line 166 "src/parser/tiger_parser.yy"
+  case 24: // negExpr: "-" expr
+#line 169 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, new IntegerLiteral(yystack_[1].location, 0), yystack_[0].value.as < Expr * > (), o_minus); }
-#line 952 "tiger_parser.tab.cc"
+#line 963 "tiger_parser.tab.cc"
     break;
 
-  case 24: // opExpr: expr "+" expr
-#line 172 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_plus); }
-#line 958 "tiger_parser.tab.cc"
-    break;
-
-  case 25: // opExpr: expr "-" expr
-#line 173 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_minus); }
-#line 964 "tiger_parser.tab.cc"
-    break;
-
-  case 26: // opExpr: expr "*" expr
-#line 174 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_times); }
-#line 970 "tiger_parser.tab.cc"
-    break;
-
-  case 27: // opExpr: expr "/" expr
+  case 25: // opExpr: expr "+" expr
 #line 175 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_divide); }
-#line 976 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_plus); }
+#line 969 "tiger_parser.tab.cc"
     break;
 
-  case 28: // opExpr: expr "=" expr
+  case 26: // opExpr: expr "-" expr
 #line 176 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_eq); }
-#line 982 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_minus); }
+#line 975 "tiger_parser.tab.cc"
     break;
 
-  case 29: // opExpr: expr "<>" expr
+  case 27: // opExpr: expr "*" expr
 #line 177 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_neq); }
-#line 988 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_times); }
+#line 981 "tiger_parser.tab.cc"
     break;
 
-  case 30: // opExpr: expr "<" expr
+  case 28: // opExpr: expr "/" expr
 #line 178 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_lt); }
-#line 994 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_divide); }
+#line 987 "tiger_parser.tab.cc"
     break;
 
-  case 31: // opExpr: expr ">" expr
+  case 29: // opExpr: expr "=" expr
 #line 179 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_gt); }
-#line 1000 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_eq); }
+#line 993 "tiger_parser.tab.cc"
     break;
 
-  case 32: // opExpr: expr "<=" expr
+  case 30: // opExpr: expr "<>" expr
 #line 180 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_le); }
-#line 1006 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_neq); }
+#line 999 "tiger_parser.tab.cc"
     break;
 
-  case 33: // opExpr: expr ">=" expr
+  case 31: // opExpr: expr "<" expr
 #line 181 "src/parser/tiger_parser.yy"
-                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_ge); }
-#line 1012 "tiger_parser.tab.cc"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_lt); }
+#line 1005 "tiger_parser.tab.cc"
     break;
 
-  case 34: // opExpr: expr "&" expr
+  case 32: // opExpr: expr ">" expr
 #line 182 "src/parser/tiger_parser.yy"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_gt); }
+#line 1011 "tiger_parser.tab.cc"
+    break;
+
+  case 33: // opExpr: expr "<=" expr
+#line 183 "src/parser/tiger_parser.yy"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_le); }
+#line 1017 "tiger_parser.tab.cc"
+    break;
+
+  case 34: // opExpr: expr ">=" expr
+#line 184 "src/parser/tiger_parser.yy"
+                         { yylhs.value.as < Expr * > () = new BinaryOperator(yystack_[1].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), o_ge); }
+#line 1023 "tiger_parser.tab.cc"
+    break;
+
+  case 35: // opExpr: expr "&" expr
+#line 185 "src/parser/tiger_parser.yy"
                          {
         yylhs.value.as < Expr * > () = new IfThenElse(yystack_[1].location, yystack_[2].value.as < Expr * > (),
                             new IfThenElse(yystack_[0].location, yystack_[0].value.as < Expr * > (), new IntegerLiteral(nl, 1), new IntegerLiteral(nl, 0)),
                             new IntegerLiteral(nl, 0));
       }
-#line 1022 "tiger_parser.tab.cc"
+#line 1033 "tiger_parser.tab.cc"
     break;
 
-  case 35: // assignExpr: "id" ":=" expr
-#line 191 "src/parser/tiger_parser.yy"
+  case 36: // opExpr: expr "|" expr
+#line 190 "src/parser/tiger_parser.yy"
+                         {
+        yylhs.value.as < Expr * > () = new IfThenElse(yystack_[1].location, yystack_[2].value.as < Expr * > (),
+                            new IntegerLiteral(nl, 1),
+                            new IfThenElse(yystack_[0].location, yystack_[0].value.as < Expr * > (), new IntegerLiteral(nl, 1), new IntegerLiteral(nl, 0)));
+      }
+#line 1043 "tiger_parser.tab.cc"
+    break;
+
+  case 37: // assignExpr: "id" ":=" expr
+#line 199 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new Assign(yystack_[1].location, new Identifier(yystack_[2].location, yystack_[2].value.as < Symbol > ()), yystack_[0].value.as < Expr * > ()); }
-#line 1028 "tiger_parser.tab.cc"
+#line 1049 "tiger_parser.tab.cc"
     break;
 
-  case 36: // whileExpr: "while" expr "do" expr
-#line 194 "src/parser/tiger_parser.yy"
+  case 38: // ifExpr: "if" expr "then" expr
+#line 202 "src/parser/tiger_parser.yy"
+                                        { yylhs.value.as < Expr * > () = new IfThenElse(yystack_[3].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > (), new Sequence(yystack_[3].location, std::vector<Expr *>())); }
+#line 1055 "tiger_parser.tab.cc"
+    break;
+
+  case 39: // ifExpr: "if" expr "then" expr "else" expr
+#line 203 "src/parser/tiger_parser.yy"
+                                    { yylhs.value.as < Expr * > () = new IfThenElse(yystack_[5].location, yystack_[4].value.as < Expr * > (), yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > ()); }
+#line 1061 "tiger_parser.tab.cc"
+    break;
+
+  case 40: // whileExpr: "while" expr "do" expr
+#line 206 "src/parser/tiger_parser.yy"
                               { yylhs.value.as < Expr * > () = new WhileLoop(yystack_[3].location, yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > ()); }
-#line 1034 "tiger_parser.tab.cc"
+#line 1067 "tiger_parser.tab.cc"
     break;
 
-  case 37: // forExpr: "for" "id" ":=" expr "to" expr "do" expr
-#line 198 "src/parser/tiger_parser.yy"
+  case 41: // forExpr: "for" "id" ":=" expr "to" expr "do" expr
+#line 210 "src/parser/tiger_parser.yy"
   { yylhs.value.as < Expr * > () = new ForLoop(yystack_[7].location, new VarDecl(yystack_[6].location, yystack_[6].value.as < Symbol > (), boost::none, yystack_[4].value.as < Expr * > (), true), yystack_[2].value.as < Expr * > (), yystack_[0].value.as < Expr * > ()); }
-#line 1040 "tiger_parser.tab.cc"
+#line 1073 "tiger_parser.tab.cc"
     break;
 
-  case 38: // breakExpr: "break"
-#line 201 "src/parser/tiger_parser.yy"
+  case 42: // breakExpr: "break"
+#line 213 "src/parser/tiger_parser.yy"
                  { yylhs.value.as < Expr * > () = new Break(yystack_[0].location); }
-#line 1046 "tiger_parser.tab.cc"
+#line 1079 "tiger_parser.tab.cc"
     break;
 
-  case 39: // letExpr: "let" decls "in" exprs "end"
-#line 205 "src/parser/tiger_parser.yy"
-  { yylhs.value.as < Expr * > () = new Let(yystack_[4].location, yystack_[3].value.as < std::vector<Decl *> > (), new Sequence(nl, yystack_[1].value.as < std::vector<Expr *> > ())); }
-#line 1052 "tiger_parser.tab.cc"
-    break;
-
-  case 40: // seqExpr: "(" exprs ")"
-#line 208 "src/parser/tiger_parser.yy"
-                              { yylhs.value.as < Expr * > () = new Sequence(yystack_[2].location, yystack_[1].value.as < std::vector<Expr *> > ()); }
-#line 1058 "tiger_parser.tab.cc"
-    break;
-
-  case 41: // exprs: %empty
-#line 211 "src/parser/tiger_parser.yy"
-       { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>(); }
-#line 1064 "tiger_parser.tab.cc"
-    break;
-
-  case 42: // exprs: nonemptyexprs
-#line 212 "src/parser/tiger_parser.yy"
-                  { yylhs.value.as < std::vector<Expr *> > () = yystack_[0].value.as < std::vector<Expr *> > (); }
-#line 1070 "tiger_parser.tab.cc"
-    break;
-
-  case 43: // nonemptyexprs: expr
-#line 215 "src/parser/tiger_parser.yy"
-                    { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>({yystack_[0].value.as < Expr * > ()}); }
-#line 1076 "tiger_parser.tab.cc"
-    break;
-
-  case 44: // nonemptyexprs: nonemptyexprs ";" expr
+  case 43: // letExpr: "let" decls "in" exprs "end"
 #line 217 "src/parser/tiger_parser.yy"
-  {
-    yylhs.value.as < std::vector<Expr *> > () = std::move(yystack_[2].value.as < std::vector<Expr *> > ());
-    yylhs.value.as < std::vector<Expr *> > ().push_back(yystack_[0].value.as < Expr * > ());
-  }
+  { yylhs.value.as < Expr * > () = new Let(yystack_[4].location, yystack_[3].value.as < std::vector<Decl *> > (), new Sequence(nl, yystack_[1].value.as < std::vector<Expr *> > ())); }
 #line 1085 "tiger_parser.tab.cc"
     break;
 
-  case 45: // arguments: %empty
-#line 223 "src/parser/tiger_parser.yy"
-           { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>(); }
+  case 44: // seqExpr: "(" exprs ")"
+#line 220 "src/parser/tiger_parser.yy"
+                              { yylhs.value.as < Expr * > () = new Sequence(yystack_[2].location, yystack_[1].value.as < std::vector<Expr *> > ()); }
 #line 1091 "tiger_parser.tab.cc"
     break;
 
-  case 46: // arguments: nonemptyarguments
-#line 224 "src/parser/tiger_parser.yy"
-                      { yylhs.value.as < std::vector<Expr *> > () = yystack_[0].value.as < std::vector<Expr *> > (); }
+  case 45: // exprs: %empty
+#line 223 "src/parser/tiger_parser.yy"
+       { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>(); }
 #line 1097 "tiger_parser.tab.cc"
     break;
 
-  case 47: // nonemptyarguments: expr
-#line 227 "src/parser/tiger_parser.yy"
-                        { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>({yystack_[0].value.as < Expr * > ()}); }
+  case 46: // exprs: nonemptyexprs
+#line 224 "src/parser/tiger_parser.yy"
+                  { yylhs.value.as < std::vector<Expr *> > () = yystack_[0].value.as < std::vector<Expr *> > (); }
 #line 1103 "tiger_parser.tab.cc"
     break;
 
-  case 48: // nonemptyarguments: nonemptyarguments "," expr
+  case 47: // nonemptyexprs: expr
+#line 227 "src/parser/tiger_parser.yy"
+                    { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>({yystack_[0].value.as < Expr * > ()}); }
+#line 1109 "tiger_parser.tab.cc"
+    break;
+
+  case 48: // nonemptyexprs: nonemptyexprs ";" expr
 #line 229 "src/parser/tiger_parser.yy"
   {
     yylhs.value.as < std::vector<Expr *> > () = std::move(yystack_[2].value.as < std::vector<Expr *> > ());
     yylhs.value.as < std::vector<Expr *> > ().push_back(yystack_[0].value.as < Expr * > ());
   }
-#line 1112 "tiger_parser.tab.cc"
-    break;
-
-  case 49: // params: %empty
-#line 235 "src/parser/tiger_parser.yy"
-        { yylhs.value.as < std::vector<VarDecl *> > () = std::vector<VarDecl *>(); }
 #line 1118 "tiger_parser.tab.cc"
     break;
 
-  case 50: // params: nonemptyparams
-#line 236 "src/parser/tiger_parser.yy"
-                   { yylhs.value.as < std::vector<VarDecl *> > () = yystack_[0].value.as < std::vector<VarDecl *> > (); }
+  case 49: // arguments: %empty
+#line 235 "src/parser/tiger_parser.yy"
+           { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>(); }
 #line 1124 "tiger_parser.tab.cc"
     break;
 
-  case 51: // nonemptyparams: param
-#line 239 "src/parser/tiger_parser.yy"
-                      { yylhs.value.as < std::vector<VarDecl *> > () = std::vector<VarDecl *>({yystack_[0].value.as < VarDecl * > ()}); }
+  case 50: // arguments: nonemptyarguments
+#line 236 "src/parser/tiger_parser.yy"
+                      { yylhs.value.as < std::vector<Expr *> > () = yystack_[0].value.as < std::vector<Expr *> > (); }
 #line 1130 "tiger_parser.tab.cc"
     break;
 
-  case 52: // nonemptyparams: nonemptyparams "," param
+  case 51: // nonemptyarguments: expr
+#line 239 "src/parser/tiger_parser.yy"
+                        { yylhs.value.as < std::vector<Expr *> > () = std::vector<Expr *>({yystack_[0].value.as < Expr * > ()}); }
+#line 1136 "tiger_parser.tab.cc"
+    break;
+
+  case 52: // nonemptyarguments: nonemptyarguments "," expr
 #line 241 "src/parser/tiger_parser.yy"
+  {
+    yylhs.value.as < std::vector<Expr *> > () = std::move(yystack_[2].value.as < std::vector<Expr *> > ());
+    yylhs.value.as < std::vector<Expr *> > ().push_back(yystack_[0].value.as < Expr * > ());
+  }
+#line 1145 "tiger_parser.tab.cc"
+    break;
+
+  case 53: // params: %empty
+#line 247 "src/parser/tiger_parser.yy"
+        { yylhs.value.as < std::vector<VarDecl *> > () = std::vector<VarDecl *>(); }
+#line 1151 "tiger_parser.tab.cc"
+    break;
+
+  case 54: // params: nonemptyparams
+#line 248 "src/parser/tiger_parser.yy"
+                   { yylhs.value.as < std::vector<VarDecl *> > () = yystack_[0].value.as < std::vector<VarDecl *> > (); }
+#line 1157 "tiger_parser.tab.cc"
+    break;
+
+  case 55: // nonemptyparams: param
+#line 251 "src/parser/tiger_parser.yy"
+                      { yylhs.value.as < std::vector<VarDecl *> > () = std::vector<VarDecl *>({yystack_[0].value.as < VarDecl * > ()}); }
+#line 1163 "tiger_parser.tab.cc"
+    break;
+
+  case 56: // nonemptyparams: nonemptyparams "," param
+#line 253 "src/parser/tiger_parser.yy"
   {
     yylhs.value.as < std::vector<VarDecl *> > () = std::move(yystack_[2].value.as < std::vector<VarDecl *> > ());
     yylhs.value.as < std::vector<VarDecl *> > ().push_back(yystack_[0].value.as < VarDecl * > ());
   }
-#line 1139 "tiger_parser.tab.cc"
+#line 1172 "tiger_parser.tab.cc"
     break;
 
-  case 53: // decls: %empty
-#line 247 "src/parser/tiger_parser.yy"
+  case 57: // decls: %empty
+#line 259 "src/parser/tiger_parser.yy"
        { yylhs.value.as < std::vector<Decl *> > () = std::vector<Decl *>();}
-#line 1145 "tiger_parser.tab.cc"
+#line 1178 "tiger_parser.tab.cc"
     break;
 
-  case 54: // decls: decls decl
-#line 249 "src/parser/tiger_parser.yy"
+  case 58: // decls: decls decl
+#line 261 "src/parser/tiger_parser.yy"
   {
     yylhs.value.as < std::vector<Decl *> > () = std::move(yystack_[1].value.as < std::vector<Decl *> > ());
     yylhs.value.as < std::vector<Decl *> > ().push_back(yystack_[0].value.as < Decl * > ());
   }
-#line 1154 "tiger_parser.tab.cc"
+#line 1187 "tiger_parser.tab.cc"
     break;
 
-  case 55: // param: "id" ":" "id"
-#line 255 "src/parser/tiger_parser.yy"
+  case 59: // param: "id" ":" "id"
+#line 267 "src/parser/tiger_parser.yy"
                    { yylhs.value.as < VarDecl * > () = new VarDecl(yystack_[2].location, yystack_[2].value.as < Symbol > (), yystack_[0].value.as < Symbol > (), nullptr); }
-#line 1160 "tiger_parser.tab.cc"
+#line 1193 "tiger_parser.tab.cc"
     break;
 
-  case 56: // typeannotation: %empty
-#line 258 "src/parser/tiger_parser.yy"
+  case 60: // typeannotation: %empty
+#line 270 "src/parser/tiger_parser.yy"
                 { yylhs.value.as < boost::optional<Symbol> > () = boost::none; }
-#line 1166 "tiger_parser.tab.cc"
+#line 1199 "tiger_parser.tab.cc"
     break;
 
-  case 57: // typeannotation: ":" "id"
-#line 259 "src/parser/tiger_parser.yy"
+  case 61: // typeannotation: ":" "id"
+#line 271 "src/parser/tiger_parser.yy"
              { yylhs.value.as < boost::optional<Symbol> > () = yystack_[0].value.as < Symbol > (); }
-#line 1172 "tiger_parser.tab.cc"
+#line 1205 "tiger_parser.tab.cc"
     break;
 
 
-#line 1176 "tiger_parser.tab.cc"
+#line 1209 "tiger_parser.tab.cc"
 
             default:
               break;
@@ -1524,134 +1557,147 @@ namespace yy {
   }
 
 
-  const signed char tiger_parser::yypact_ninf_ = -16;
+  const signed char tiger_parser::yypact_ninf_ = -37;
 
   const signed char tiger_parser::yytable_ninf_ = -1;
 
-  const signed char
+  const short
   tiger_parser::yypact_[] =
   {
-      43,    43,    43,    43,   -15,   -16,   -16,    -5,   -16,   -16,
-      28,   110,   -16,   -16,   -16,   -16,   -16,   -16,   -16,   -16,
-     -16,   -16,   -16,   -16,   110,    22,    25,   -16,    -6,    11,
-      37,    43,    43,   -16,    43,    43,    43,    43,    43,    43,
-      43,    43,    43,    43,    43,   -16,    43,    43,    43,    43,
-      29,    30,   -16,   -16,   -16,   110,    38,    72,   110,     3,
-       3,   -16,   -16,     8,     8,    40,    40,    40,    40,   121,
-     110,   110,    91,    47,    77,    80,   -16,    43,    43,   -16,
-      48,    49,    65,   110,    45,    84,    82,    89,   -16,   -16,
-      43,    43,    56,    80,    48,   110,   110,   -16,    81,   -16,
-      43,   110
+      43,    43,    43,    43,    43,   -36,   -37,   -37,    11,   -37,
+     -37,    18,   150,   -37,   -37,   -37,   -37,   -37,   -37,   -37,
+     -37,   -37,   -37,   -37,   -37,   -37,   150,    16,    31,   -37,
+     135,    -5,    55,    37,    43,    43,   -37,    43,    43,    43,
+      43,    43,    43,    43,    43,    43,    43,    43,    43,   -37,
+      43,    43,    43,    43,    43,    30,    41,   -37,   -37,   -37,
+     150,    72,    80,   150,    62,    62,   -37,   -37,     9,     9,
+      19,    19,    19,    19,   162,    45,   150,   119,   150,   100,
+      69,    96,    99,   -37,    43,    43,    43,   -37,    67,    68,
+      85,   150,   150,    77,   104,   115,   120,   -37,   -37,    43,
+      43,    87,    99,    67,   150,   150,   -37,   111,   -37,    43,
+     150
   };
 
   const signed char
   tiger_parser::yydefact_[] =
   {
-       0,    41,     0,     0,     0,    53,    38,    21,    19,    20,
-       0,     2,     5,    16,     7,     8,    10,     9,    11,    12,
-      13,    14,    15,     6,    43,     0,    42,    23,     0,     0,
-       0,    45,     0,     1,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    40,     0,     0,     0,    41,
-       0,     0,    54,     3,     4,    47,     0,    46,    35,    24,
-      25,    26,    27,    28,    29,    30,    32,    31,    33,    34,
-      44,    36,     0,     0,     0,    56,    22,     0,     0,    39,
-      49,     0,     0,    48,     0,     0,     0,    50,    51,    57,
-       0,     0,     0,    56,     0,    17,    37,    55,     0,    52,
-       0,    18
+       0,    45,     0,     0,     0,     0,    57,    42,    22,    20,
+      21,     0,     2,     5,    16,     7,     8,    10,     9,    11,
+      17,    12,    13,    14,    15,     6,    47,     0,    46,    24,
+       0,     0,     0,     0,    49,     0,     1,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    44,
+       0,     0,     0,     0,    45,     0,     0,    58,     3,     4,
+      51,     0,    50,    37,    25,    26,    27,    28,    29,    30,
+      31,    33,    32,    34,    35,    36,    48,    38,    40,     0,
+       0,     0,    60,    23,     0,     0,     0,    43,    53,     0,
+       0,    52,    39,     0,     0,     0,    54,    55,    61,     0,
+       0,     0,    60,     0,    18,    41,    59,     0,    56,     0,
+      19
   };
 
   const signed char
   tiger_parser::yypgoto_[] =
   {
-     -16,   -16,   -16,     0,   -16,   -16,   -16,   -16,   -16,   -16,
-     -16,   -16,   -16,   -16,   -16,   -16,   -16,   -16,    50,   -16,
-     -16,   -16,   -16,   -16,   -16,     2,     1
+     -37,   -37,   -37,     0,   -37,   -37,   -37,   -37,   -37,   -37,
+     -37,   -37,   -37,   -37,   -37,   -37,   -37,   -37,   -37,    73,
+     -37,   -37,   -37,   -37,   -37,   -37,    23,    39
   };
 
   const signed char
   tiger_parser::yydefgoto_[] =
   {
-       0,    10,    52,    24,    53,    54,    12,    13,    14,    15,
-      16,    17,    18,    19,    20,    21,    22,    23,    25,    26,
-      56,    57,    86,    87,    30,    88,    82
+       0,    11,    57,    26,    58,    59,    13,    14,    15,    16,
+      17,    18,    19,    20,    21,    22,    23,    24,    25,    27,
+      28,    61,    62,    95,    96,    33,    97,    90
   };
 
   const signed char
   tiger_parser::yytable_[] =
   {
-      11,    31,    27,    28,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,    36,    37,    32,    34,    35,
-      36,    37,    29,    47,    40,    41,    42,    43,    33,    45,
-      46,    55,    58,    48,    59,    60,    61,    62,    63,    64,
-      65,    66,    67,    68,    69,    76,    70,    71,    72,     1,
-      34,    35,    36,    37,     2,    34,    35,    36,    37,    38,
-      39,    40,    41,    42,    43,    44,    74,    75,    49,     3,
-       4,    50,    51,     5,    91,    77,     6,    83,    84,    79,
-       7,     8,     9,    80,    81,    85,    89,    90,    92,    93,
-      95,    96,    94,    97,    98,   100,    99,     0,     0,    73,
-     101,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43,    44,     0,     0,     0,     0,     0,     0,     0,    78,
-      34,    35,    36,    37,    38,    39,    40,    41,    42,    43,
-      44,    34,    35,    36,    37,    38,    39,    40,    41,    42,
-      43
+      12,    32,    29,    30,    31,    37,    38,    39,    40,    41,
+      42,    43,    44,    45,    46,    47,    48,    34,    36,    37,
+      38,    39,    40,    49,    52,    43,    44,    45,    46,    37,
+      38,    39,    40,    35,    60,    63,    50,    64,    65,    66,
+      67,    68,    69,    70,    71,    72,    73,    74,    75,     1,
+      76,    77,    78,    79,     2,    37,    38,    39,    40,    41,
+      42,    43,    44,    45,    46,    47,     3,    81,    54,     4,
+       5,    55,    56,     6,    39,    40,     7,    53,    82,    83,
+       8,     9,    10,    84,    91,    92,    93,    37,    38,    39,
+      40,    41,    42,    43,    44,    45,    46,    47,    48,   104,
+     105,    87,    88,    89,    94,    98,   100,    99,   101,   110,
+      37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
+      47,    48,   102,   103,   106,   109,   108,    80,    86,    37,
+      38,    39,    40,    41,    42,    43,    44,    45,    46,    47,
+      48,   107,     0,     0,    85,    37,    38,    39,    40,    41,
+      42,    43,    44,    45,    46,    47,    48,     0,     0,    51,
+      37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
+      47,    48,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46
   };
 
   const signed char
   tiger_parser::yycheck_[] =
   {
-       0,     6,     2,     3,    10,    11,    12,    13,    14,    15,
-      16,    17,    18,    19,    20,    12,    13,    22,    10,    11,
-      12,    13,    37,    29,    16,    17,    18,    19,     0,     7,
-       5,    31,    32,    22,    34,    35,    36,    37,    38,    39,
-      40,    41,    42,    43,    44,     7,    46,    47,    48,     6,
-      10,    11,    12,    13,    11,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    37,    37,    31,    26,
-      27,    34,    35,    30,    29,     3,    33,    77,    78,    32,
-      37,    38,    39,     6,     4,    37,    37,    22,     4,     7,
-      90,    91,     3,    37,    93,    14,    94,    -1,    -1,    49,
-     100,    10,    11,    12,    13,    14,    15,    16,    17,    18,
-      19,    20,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    28,
+       0,    37,     2,     3,     4,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,     6,     0,    10,
+      11,    12,    13,     7,    29,    16,    17,    18,    19,    10,
+      11,    12,    13,    22,    34,    35,     5,    37,    38,    39,
+      40,    41,    42,    43,    44,    45,    46,    47,    48,     6,
+      50,    51,    52,    53,    11,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    23,    37,    31,    26,
+      27,    34,    35,    30,    12,    13,    33,    22,    37,     7,
+      37,    38,    39,     3,    84,    85,    86,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,    20,    21,    99,
+     100,    32,     6,     4,    37,    37,    29,    22,     4,   109,
       10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
-      20,    10,    11,    12,    13,    14,    15,    16,    17,    18,
-      19
+      20,    21,     7,     3,    37,    14,   103,    54,    28,    10,
+      11,    12,    13,    14,    15,    16,    17,    18,    19,    20,
+      21,   102,    -1,    -1,    25,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    20,    21,    -1,    -1,    24,
+      10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
+      20,    21,    10,    11,    12,    13,    14,    15,    16,    17,
+      18,    19
   };
 
   const signed char
   tiger_parser::yystos_[] =
   {
-       0,     6,    11,    26,    27,    30,    33,    37,    38,    39,
-      43,    45,    48,    49,    50,    51,    52,    53,    54,    55,
-      56,    57,    58,    59,    45,    60,    61,    45,    45,    37,
-      66,     6,    22,     0,    10,    11,    12,    13,    14,    15,
-      16,    17,    18,    19,    20,     7,     5,    29,    22,    31,
-      34,    35,    44,    46,    47,    45,    62,    63,    45,    45,
-      45,    45,    45,    45,    45,    45,    45,    45,    45,    45,
-      45,    45,    45,    60,    37,    37,     7,     3,    28,    32,
-       6,     4,    68,    45,    45,    37,    64,    65,    67,    37,
-      22,    29,     4,     7,     3,    45,    45,    37,    68,    67,
-      14,    45
+       0,     6,    11,    23,    26,    27,    30,    33,    37,    38,
+      39,    44,    46,    49,    50,    51,    52,    53,    54,    55,
+      56,    57,    58,    59,    60,    61,    46,    62,    63,    46,
+      46,    46,    37,    68,     6,    22,     0,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,    20,    21,     7,
+       5,    24,    29,    22,    31,    34,    35,    45,    47,    48,
+      46,    64,    65,    46,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    46,    46,
+      62,    37,    37,     7,     3,    25,    28,    32,     6,     4,
+      70,    46,    46,    46,    37,    66,    67,    69,    37,    22,
+      29,     4,     7,     3,    46,    46,    37,    70,    69,    14,
+      46
   };
 
   const signed char
   tiger_parser::yyr1_[] =
   {
-       0,    42,    43,    44,    44,    45,    45,    45,    45,    45,
-      45,    45,    45,    45,    45,    45,    45,    46,    47,    48,
-      49,    50,    51,    52,    53,    53,    53,    53,    53,    53,
-      53,    53,    53,    53,    53,    54,    55,    56,    57,    58,
-      59,    60,    60,    61,    61,    62,    62,    63,    63,    64,
-      64,    65,    65,    66,    66,    67,    68,    68
+       0,    43,    44,    45,    45,    46,    46,    46,    46,    46,
+      46,    46,    46,    46,    46,    46,    46,    46,    47,    48,
+      49,    50,    51,    52,    53,    54,    54,    54,    54,    54,
+      54,    54,    54,    54,    54,    54,    54,    55,    56,    56,
+      57,    58,    59,    60,    61,    62,    62,    63,    63,    64,
+      64,    65,    65,    66,    66,    67,    67,    68,    68,    69,
+      70,    70
   };
 
   const signed char
   tiger_parser::yyr2_[] =
   {
        0,     2,     1,     1,     1,     1,     1,     1,     1,     1,
-       1,     1,     1,     1,     1,     1,     1,     5,     8,     1,
-       1,     1,     4,     2,     3,     3,     3,     3,     3,     3,
-       3,     3,     3,     3,     3,     3,     4,     8,     1,     5,
-       3,     0,     1,     1,     3,     0,     1,     1,     3,     0,
-       1,     1,     3,     0,     2,     3,     0,     2
+       1,     1,     1,     1,     1,     1,     1,     1,     5,     8,
+       1,     1,     1,     4,     2,     3,     3,     3,     3,     3,
+       3,     3,     3,     3,     3,     3,     3,     3,     4,     6,
+       4,     8,     1,     5,     3,     0,     1,     1,     3,     0,
+       1,     1,     3,     0,     1,     1,     3,     0,     2,     3,
+       0,     2
   };
 
 
@@ -1667,12 +1713,12 @@ namespace yy {
   "\"&\"", "\"|\"", "\":=\"", "\"if\"", "\"then\"", "\"else\"",
   "\"while\"", "\"for\"", "\"to\"", "\"do\"", "\"let\"", "\"in\"",
   "\"end\"", "\"break\"", "\"function\"", "\"var\"", "\"uminus\"",
-  "\"id\"", "\"string\"", "\"integer\"", "TYPE", "OF", "$accept",
-  "program", "decl", "expr", "varDecl", "funcDecl", "stringExpr",
-  "intExpr", "var", "callExpr", "negExpr", "opExpr", "assignExpr",
-  "whileExpr", "forExpr", "breakExpr", "letExpr", "seqExpr", "exprs",
-  "nonemptyexprs", "arguments", "nonemptyarguments", "params",
-  "nonemptyparams", "decls", "param", "typeannotation", YY_NULLPTR
+  "\"id\"", "\"string\"", "\"integer\"", "IF_THEN", "TYPE", "OF",
+  "$accept", "program", "decl", "expr", "varDecl", "funcDecl",
+  "stringExpr", "intExpr", "var", "callExpr", "negExpr", "opExpr",
+  "assignExpr", "ifExpr", "whileExpr", "forExpr", "breakExpr", "letExpr",
+  "seqExpr", "exprs", "nonemptyexprs", "arguments", "nonemptyarguments",
+  "params", "nonemptyparams", "decls", "param", "typeannotation", YY_NULLPTR
   };
 #endif
 
@@ -1681,12 +1727,13 @@ namespace yy {
   const short
   tiger_parser::yyrline_[] =
   {
-       0,   119,   119,   122,   123,   126,   127,   128,   129,   130,
-     131,   132,   133,   134,   135,   136,   137,   140,   144,   150,
-     154,   157,   161,   165,   172,   173,   174,   175,   176,   177,
-     178,   179,   180,   181,   182,   190,   194,   197,   201,   204,
-     208,   211,   212,   215,   216,   223,   224,   227,   228,   235,
-     236,   239,   240,   247,   248,   255,   258,   259
+       0,   121,   121,   124,   125,   128,   129,   130,   131,   132,
+     133,   134,   135,   136,   137,   138,   139,   140,   143,   147,
+     153,   157,   160,   164,   168,   175,   176,   177,   178,   179,
+     180,   181,   182,   183,   184,   185,   190,   198,   202,   203,
+     206,   209,   213,   216,   220,   223,   224,   227,   228,   235,
+     236,   239,   240,   247,   248,   251,   252,   259,   260,   267,
+     270,   271
   };
 
   void
@@ -1718,9 +1765,9 @@ namespace yy {
 
 
 } // yy
-#line 1722 "tiger_parser.tab.cc"
+#line 1769 "tiger_parser.tab.cc"
 
-#line 262 "src/parser/tiger_parser.yy"
+#line 274 "src/parser/tiger_parser.yy"
 
 
 void

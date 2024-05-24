@@ -429,6 +429,7 @@ namespace yy {
       // negExpr
       // opExpr
       // assignExpr
+      // ifExpr
       // whileExpr
       // forExpr
       // breakExpr
@@ -550,8 +551,9 @@ namespace yy {
     TOK_ID = 292,                  // "id"
     TOK_STRING = 293,              // "string"
     TOK_INT = 294,                 // "integer"
-    TOK_TYPE = 295,                // TYPE
-    TOK_OF = 296                   // OF
+    TOK_IF_THEN = 295,             // IF_THEN
+    TOK_TYPE = 296,                // TYPE
+    TOK_OF = 297                   // OF
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -568,7 +570,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 42, ///< Number of tokens.
+        YYNTOKENS = 43, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -610,35 +612,37 @@ namespace yy {
         S_ID = 37,                               // "id"
         S_STRING = 38,                           // "string"
         S_INT = 39,                              // "integer"
-        S_TYPE = 40,                             // TYPE
-        S_OF = 41,                               // OF
-        S_YYACCEPT = 42,                         // $accept
-        S_program = 43,                          // program
-        S_decl = 44,                             // decl
-        S_expr = 45,                             // expr
-        S_varDecl = 46,                          // varDecl
-        S_funcDecl = 47,                         // funcDecl
-        S_stringExpr = 48,                       // stringExpr
-        S_intExpr = 49,                          // intExpr
-        S_var = 50,                              // var
-        S_callExpr = 51,                         // callExpr
-        S_negExpr = 52,                          // negExpr
-        S_opExpr = 53,                           // opExpr
-        S_assignExpr = 54,                       // assignExpr
-        S_whileExpr = 55,                        // whileExpr
-        S_forExpr = 56,                          // forExpr
-        S_breakExpr = 57,                        // breakExpr
-        S_letExpr = 58,                          // letExpr
-        S_seqExpr = 59,                          // seqExpr
-        S_exprs = 60,                            // exprs
-        S_nonemptyexprs = 61,                    // nonemptyexprs
-        S_arguments = 62,                        // arguments
-        S_nonemptyarguments = 63,                // nonemptyarguments
-        S_params = 64,                           // params
-        S_nonemptyparams = 65,                   // nonemptyparams
-        S_decls = 66,                            // decls
-        S_param = 67,                            // param
-        S_typeannotation = 68                    // typeannotation
+        S_IF_THEN = 40,                          // IF_THEN
+        S_TYPE = 41,                             // TYPE
+        S_OF = 42,                               // OF
+        S_YYACCEPT = 43,                         // $accept
+        S_program = 44,                          // program
+        S_decl = 45,                             // decl
+        S_expr = 46,                             // expr
+        S_varDecl = 47,                          // varDecl
+        S_funcDecl = 48,                         // funcDecl
+        S_stringExpr = 49,                       // stringExpr
+        S_intExpr = 50,                          // intExpr
+        S_var = 51,                              // var
+        S_callExpr = 52,                         // callExpr
+        S_negExpr = 53,                          // negExpr
+        S_opExpr = 54,                           // opExpr
+        S_assignExpr = 55,                       // assignExpr
+        S_ifExpr = 56,                           // ifExpr
+        S_whileExpr = 57,                        // whileExpr
+        S_forExpr = 58,                          // forExpr
+        S_breakExpr = 59,                        // breakExpr
+        S_letExpr = 60,                          // letExpr
+        S_seqExpr = 61,                          // seqExpr
+        S_exprs = 62,                            // exprs
+        S_nonemptyexprs = 63,                    // nonemptyexprs
+        S_arguments = 64,                        // arguments
+        S_nonemptyarguments = 65,                // nonemptyarguments
+        S_params = 66,                           // params
+        S_nonemptyparams = 67,                   // nonemptyparams
+        S_decls = 68,                            // decls
+        S_param = 69,                            // param
+        S_typeannotation = 70                    // typeannotation
       };
     };
 
@@ -690,6 +694,7 @@ namespace yy {
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -919,6 +924,7 @@ switch (yykind)
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -1059,7 +1065,7 @@ switch (yykind)
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOK_EOF
                    || (token::TOK_YYerror <= tok && tok <= token::TOK_UMINUS)
-                   || (token::TOK_TYPE <= tok && tok <= token::TOK_OF));
+                   || (token::TOK_IF_THEN <= tok && tok <= token::TOK_OF));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -1737,6 +1743,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_IF_THEN (location_type l)
+      {
+        return symbol_type (token::TOK_IF_THEN, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_IF_THEN (const location_type& l)
+      {
+        return symbol_type (token::TOK_IF_THEN, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_TYPE (location_type l)
       {
         return symbol_type (token::TOK_TYPE, std::move (l));
@@ -1834,7 +1855,7 @@ switch (yykind)
     // Tables.
     // YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
     // STATE-NUM.
-    static const signed char yypact_[];
+    static const short yypact_[];
 
     // YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
     // Performed when YYTABLE does not specify something else to do.  Zero
@@ -2094,9 +2115,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 140,     ///< Last index in yytable_.
-      yynnts_ = 27,  ///< Number of nonterminal symbols.
-      yyfinal_ = 33 ///< Termination state number.
+      yylast_ = 181,     ///< Last index in yytable_.
+      yynnts_ = 28,  ///< Number of nonterminal symbols.
+      yyfinal_ = 36 ///< Termination state number.
     };
 
 
@@ -2144,10 +2165,10 @@ switch (yykind)
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37,    38,    39,    40,    41
+      35,    36,    37,    38,    39,    40,    41,    42
     };
     // Last valid token kind.
-    const int code_max = 296;
+    const int code_max = 297;
 
     if (t <= 0)
       return symbol_kind::S_YYEOF;
@@ -2181,6 +2202,7 @@ switch (yykind)
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -2268,6 +2290,7 @@ switch (yykind)
       case symbol_kind::S_negExpr: // negExpr
       case symbol_kind::S_opExpr: // opExpr
       case symbol_kind::S_assignExpr: // assignExpr
+      case symbol_kind::S_ifExpr: // ifExpr
       case symbol_kind::S_whileExpr: // whileExpr
       case symbol_kind::S_forExpr: // forExpr
       case symbol_kind::S_breakExpr: // breakExpr
@@ -2375,7 +2398,7 @@ switch (yykind)
 
 
 } // yy
-#line 2379 "tiger_parser.tab.hh"
+#line 2402 "tiger_parser.tab.hh"
 
 
 
